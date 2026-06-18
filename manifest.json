@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "ScrollStop",
+  "version": "1.0.0",
+  "description": "Hard blocks Instagram and YouTube when your daily time limit is up.",
+  "permissions": ["storage", "alarms", "tabs"],
+  "host_permissions": [
+    "*://*.instagram.com/*",
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.instagram.com/*", "*://*.youtube.com/*"],
+      "js": ["scripts/content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["pages/blocked.html", "pages/blocked.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
